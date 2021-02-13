@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Extensions\DomainServiceCollection.cs~RFeacae05.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DockerComposeExample.Application\DockerComposeExample.Application.csproj" />
+    <ProjectReference Include="..\DockerComposeExample.Repository\DockerComposeExample.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

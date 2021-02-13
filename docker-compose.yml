@@ -1,0 +1,42 @@
+version: '3.4'
+
+networks: 
+  dockercomposeexample-network:
+    driver: bridge
+
+services:
+  dockercomposeexample.api:
+    container_name: dockercomposeexample.api
+    image: ${DOCKER_REGISTRY-}dockercomposeexampleapi
+    build:
+      context: .
+      dockerfile: DockerComposeExample.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+80
+      - ASPNETCORE_HTTPS_PORT=44311
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=totvschallange
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=conf.d/https/dev_cert.pfx
+    ports:
+      - "40420:80"
+      - "44362:443"
+    volumes:
+      - ./conf.d/https/:/https/
+    networks:
+      - dockercomposeexample-network
+    depends_on:
+      - dockercomposeexample.sqlserver
+
+  dockercomposeexample.redis:
+    container_name: dockercomposeexample.redis
+    image: redis:alpine
+    ports:
+      - "16379:6379"
+    networks:
+      - dockercomposeexample-network
+
+  dockercomposeexample.sqlserver:
+    container_name: dockercomposeexample.sqlserver
+    image: microsoft/mssql-server-linux:2017-latest
+    networks:
+      - dockercomposeexample-network
