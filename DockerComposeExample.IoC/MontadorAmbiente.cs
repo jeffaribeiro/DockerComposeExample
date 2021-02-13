@@ -11,9 +11,9 @@ namespace DockerComposeExample.IoC
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetService<DockerComposeExampleDbContext>();
-                System.Console.WriteLine("Aplicando Migrations...");
-                context.Database.Migrate();   
+            //    var context = serviceScope.ServiceProvider.GetService<DockerComposeExampleDbContext>();
+            //    System.Console.WriteLine("Aplicando Migrations...");
+            //    context.Database.Migrate();   
             }
         }
     }
